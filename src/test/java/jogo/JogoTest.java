@@ -1,6 +1,5 @@
-import jogo.Jogo;
-import jogo.Dado;
-import jogo.Jogador;
+package jogo;
+
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,5 +52,41 @@ class JogoTest {
 
         Jogo jogo = new Jogo(jogador, d1, d2);
         assertFalse(jogo.jogar());
+    }
+
+    @Test
+    public void testJogoGanhaPrimeiroTurno() {
+        Jogador jogador = mock(Jogador.class);
+        Dado dado1 = mock(Dado.class);  
+        Dado dado2 = mock(Dado.class);
+        
+        when(jogador.lancar(dado1, dado2)).thenReturn(7);   
+    }
+
+    @Test
+    public void testJogoPerdePrimeiroTurno() {
+        Jogador jogador = mock(Jogador.class);
+        Dado dado1 = mock(Dado.class);  
+        Dado dado2 = mock(Dado.class);
+        
+        when(jogador.lancar(dado1, dado2)).thenReturn(2);   
+    }
+
+    @Test
+    public void testJogoGanhaCom9Turnos() {
+        Jogador jogador = mock(Jogador.class);
+        Dado dado1 = mock(Dado.class);  
+        Dado dado2 = mock(Dado.class);
+        
+        when(jogador.lancar(dado1, dado2)).thenReturn(4, 5, 6, 8, 9, 10, 11, 3, 4);   
+    }
+
+    @Test
+    public void testJogoPerdeCom11Turnos() {
+        Jogador jogador = mock(Jogador.class);
+        Dado dado1 = mock(Dado.class);
+        Dado dado2 = mock(Dado.class);
+        
+        when(jogador.lancar(dado1, dado2)).thenReturn(4, 5, 6, 8, 9, 10, 11, 3, 2, 12, 7);  
     }
 }
